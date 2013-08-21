@@ -21,7 +21,9 @@ module.exports = function (grunt) {
                     process: function(content) {
                         var from, to, regex;
                         for(var i in options.replace) {
-                            from = i; to = options.replace[i];
+                            from = i;
+                            var toVal = options.replace[i];
+                            to = typeof(toVal) == 'function' ? toVal() : toVal;
                             regex = new RegExp(from,'g');
                             content = content.replace(regex,to);
                             grunt.log.writeln('Replace in ' + src + ': ' + from + ' to: '+ to);
